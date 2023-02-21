@@ -1,0 +1,14 @@
+{
+  "name": "kicken/osm-parser",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Kicken\\OSMParser\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "ext-xml": "*",
+    "ext-xmlreader": "*"
+  }
+}
