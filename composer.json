@@ -1,5 +1,6 @@
 {
   "name": "kicken/osm-parser",
+  "description": "Library for parsing OSM data dump files.",
   "type": "library",
   "autoload": {
     "psr-4": {
@@ -7,8 +8,9 @@
     }
   },
   "require": {
-    "php": "^8.0",
-    "ext-xml": "*",
-    "ext-xmlreader": "*"
+    "php": "^8.0"
+  },
+  "suggest": {
+    "ext-xmlreader": "Required for XML file parsing"
   }
 }

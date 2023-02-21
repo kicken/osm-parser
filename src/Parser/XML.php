@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpComposerExtensionStubsInspection */
 
 namespace Kicken\OSMParser\Parser;
 
@@ -14,6 +15,10 @@ class XML implements IteratorAggregate {
     private ?Entity $nextYield = null;
 
     public function __construct(string $xmlFile){
+        if (!class_exists('XMLReader')){
+            throw new \RuntimeException('XMLReader class is required.');
+        }
+
         $this->reader = new XMLReader();
         $this->reader->open($xmlFile);
         $this->reader->setParserProperty(XMLReader::VALIDATE, false);
