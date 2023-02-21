@@ -4,13 +4,21 @@
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Kicken\\OSMParser\\": "src/"
+      "Kicken\\OSMParser\\": "src/",
+      "OSMPBF\\": "src-osmpbf/OSMPBF",
+      "GPBMetadata\\": "src-osmpbf/GPBMetadata"
     }
   },
   "require": {
     "php": "^8.0"
   },
+  "require-dev": {
+    "ext-xmlreader": "*",
+    "google/protobuf": "^3.22"
+  },
   "suggest": {
-    "ext-xmlreader": "Required for XML file parsing"
+    "ext-xmlreader": "Required for XML file parsing",
+    "google/protobuf": "Required for PBF file parsing",
+    "ext-zlib": "Required for PBF files with compressed data."
   }
 }

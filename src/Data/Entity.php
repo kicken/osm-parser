@@ -8,7 +8,7 @@ class Entity {
     /** @var Entity[] */
     protected array $childEntities;
 
-    public function __construct(string $name, array $attributes, array $childEntities){
+    public function __construct(string $name, array $attributes, array $childEntities = []){
         $this->name = $name;
         $this->attributes = $attributes;
         $this->childEntities = $childEntities;
