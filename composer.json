@@ -1,7 +1,19 @@
 {
   "name": "kicken/osm-parser",
   "description": "Library for parsing OSM data dump files.",
+  "keywords": [
+    "osm",
+    "open street map",
+    "parser",
+    "osm.pbf"
+  ],
   "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Keith Maika"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Kicken\\OSMParser\\": "src/",
