@@ -33,9 +33,15 @@ class PBF implements \IteratorAggregate {
             throw new RuntimeException('Package google/protobuf is required for Protobuf parsing.');
         }
 
-        $this->fp = fopen($file, 'rb');
-        if (!$this->fp){
-            throw new RuntimeException('Unable to open file ' . $file);
+        set_error_handler(function(){
+        });
+        try {
+            $this->fp = fopen($file, 'rb');
+            if (!$this->fp){
+                throw new RuntimeException('Unable to open file ' . $file);
+            }
+        } finally {
+            restore_error_handler();
         }
     }
 

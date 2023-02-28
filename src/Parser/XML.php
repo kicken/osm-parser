@@ -20,8 +20,18 @@ class XML implements IteratorAggregate {
         }
 
         $this->reader = new XMLReader();
-        $this->reader->open($xmlFile);
-        $this->reader->setParserProperty(XMLReader::VALIDATE, false);
+
+        //Prevent the PHP Warning generated when open fails.
+        set_error_handler(function(){
+        });
+        try {
+            if (!$this->reader->open($xmlFile)){
+                throw new \RuntimeException('Unable to open file ' . $xmlFile);
+            }
+            $this->reader->setParserProperty(XMLReader::VALIDATE, false);
+        } finally {
+            restore_error_handler();
+        }
     }
 
     /**
