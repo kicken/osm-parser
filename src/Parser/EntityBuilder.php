@@ -6,6 +6,7 @@ use Kicken\OSMParser\Data\Entity;
 use Kicken\OSMParser\Data\Node;
 use Kicken\OSMParser\Data\Relation;
 use Kicken\OSMParser\Data\TaggedEntity;
+use Kicken\OSMParser\Data\Way;
 
 class EntityBuilder {
     private array $attributes = [];
@@ -26,6 +27,7 @@ class EntityBuilder {
         $class = match ($this->name) {
             'node' => Node::class,
             'relation' => Relation::class,
+            'way' => Way::class,
             default => Entity::class
         };
 
