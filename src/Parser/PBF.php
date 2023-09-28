@@ -155,7 +155,7 @@ class PBF implements \IteratorAggregate {
         $tags = $this->processTags($way->getKeys(), $way->getVals());
         $refId = null;
         $nodeList = $this->mapRepeatable(function($id) use (&$refId){
-            $refId = $id - $refId;
+            $refId = $id + $refId;
 
             return new Entity('nd', ['ref' => $refId]);
         }, $way->getRefs());
@@ -169,7 +169,7 @@ class PBF implements \IteratorAggregate {
         $tags = $this->processTags($relation->getKeys(), $relation->getVals());
         $refId = 0;
         $memberList = $this->mapRepeatable(function($id, $type, $role) use (&$refId){
-            $refId = $id - $refId;
+            $refId = $id + $refId;
 
             return new Entity('member', [
                 'type' => OSMRelation\MemberType::name($type)
