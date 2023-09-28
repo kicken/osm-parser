@@ -215,7 +215,7 @@ class PBF implements \IteratorAggregate {
             return new Node('node', [
                 'id' => $id
                 , 'lat' => $this->calculateLatitude($lat)
-                , 'lon' => $this->calculateLatitude($lon)
+                , 'lon' => $this->calculateLongitude($lon)
             ], $children);
         }, $denseNodes->getId(), $denseNodes->getLat(), $denseNodes->getLon());
     }
