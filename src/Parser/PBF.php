@@ -164,12 +164,16 @@ class PBF implements \IteratorAggregate {
 
     private function processRelation(OSMRelation $relation) : Relation{
         $tags = $this->processTags($relation->getKeys(), $relation->getVals());
-        $memberList = $this->mapRepeatable(function($id, $type, $role){
-            return new Entity('member', [
+        $lastId = 0;
+        $memberList = $this->mapRepeatable(function($id, $type, $role) use (&$lastId){
+            $entity = new Entity('member', [
                 'type' => OSMRelation\MemberType::name($type)
                 , 'role' => $this->currentStringTable[$role]
-                , 'ref' => $id
+                , 'ref' => $id - $lastId
             ]);
+            $lastId = $id;
+
+            return $entity;
         }, $relation->getMemids(), $relation->getTypes(), $relation->getRolesSid());
 
         return new Relation('relation', [
