@@ -153,8 +153,11 @@ class PBF implements \IteratorAggregate {
 
     private function processWay(OSMWay $way) : Way{
         $tags = $this->processTags($way->getKeys(), $way->getVals());
-        $nodeList = $this->mapRepeatable(function($id){
-            return new Entity('nd', ['ref' => $id]);
+        $refId = null;
+        $nodeList = $this->mapRepeatable(function($id) use (&$refId){
+            $refId = $id - $refId;
+
+            return new Entity('nd', ['ref' => $refId]);
         }, $way->getRefs());
 
         return new Way('way', [
@@ -164,16 +167,15 @@ class PBF implements \IteratorAggregate {
 
     private function processRelation(OSMRelation $relation) : Relation{
         $tags = $this->processTags($relation->getKeys(), $relation->getVals());
-        $lastId = 0;
-        $memberList = $this->mapRepeatable(function($id, $type, $role) use (&$lastId){
-            $entity = new Entity('member', [
+        $refId = 0;
+        $memberList = $this->mapRepeatable(function($id, $type, $role) use (&$refId){
+            $refId = $id - $refId;
+
+            return new Entity('member', [
                 'type' => OSMRelation\MemberType::name($type)
                 , 'role' => $this->currentStringTable[$role]
-                , 'ref' => $id - $lastId
+                , 'ref' => $refId
             ]);
-            $lastId = $id;
-
-            return $entity;
         }, $relation->getMemids(), $relation->getTypes(), $relation->getRolesSid());
 
         return new Relation('relation', [
